@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riftborn — Arena of Legends</title>
+
+
+
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div><div class="brand">RIFT<span>BORN</span></div><div class="subbrand">ARENA OF LEGENDS</div></div><div style="display:flex;gap:8px"><button id="musicToggle">🔊 MUSIC</button><button id="quickFight">⚔ QUICK FIGHT</button></div></header>
+<main>
+<section class="hero"><div><div class="eyebrow">BUILD YOUR LEGACY</div><h1>CREATE. FIGHT. ASCEND.</h1><p>Forge an original fighter, unleash signature abilities, challenge adaptive bosses, and claim the championship.</p></div><div class="notice">LOCAL DEMO · Your custom fighter and wins stay saved in this browser.</div></section>
+<nav class="tabs">
+<button class="tab active" data-tab="fighters">01 · FIGHTERS</button><button class="tab" data-tab="creator">02 · CREATOR</button><button class="tab" data-tab="arena">03 · ARENA</button><button class="tab" data-tab="battle">04 · BATTLE</button><button class="tab" data-tab="tournament">05 · TOURNAMENT</button>
+</nav>
+<section id="fighters" class="screen">
+<div class="section-title"><h2>Choose your champion</h2><span class="muted" id="fighterCount"></span></div>
+<div class="grid" id="roster"></div>
+<div class="action-row"><button class="primary" id="fightSelected">ENTER THE ARENA →</button><button id="editSelected">EDIT SELECTED</button></div>
+</section>
+<section id="creator" class="screen hidden">
+<div class="two">
+<div class="panel"><div class="eyebrow">FORGE A LEGEND</div><h2>Fighter Creator</h2>
+<div class="field"><label>FIGHTER NAME</label><input id="name" maxlength="22" placeholder="e.g. Nova Reign"></div>
+<div class="grid" style="grid-template-columns:1fr 1fr">
+<div class="field"><label>FIGHTING STYLE</label><select id="style"><option>Solar Boxing</option><option>Phantom Kickboxing</option><option>Void Grappling</option><option>Storm Kenjutsu</option><option>Dimension Dance</option><option>Custom Combat</option></select></div>
+<div class="field"><label>FIGHTER LOOK</label><select id="look"><option value="🥷">Shadow Ninja</option><option value="🦸">Cosmic Hero 🦸</option><option value="🤖">Cyber Warrior 🤖</option><option value="🧙">Arcane Fighter 🧙</option><option value="🐉">Dragon Knight 🐉</option><option value="🥊">Street Brawler 🥊</option></select></div></div>
+<div class="field"><label>FIGHTER CLASS</label><select id="classType"><option>Striker</option><option>Guardian</option><option>Mage</option><option>Assassin</option><option>Brawler</option></select><div id="classDescription" class="class-note"></div></div>
+<div class="field"><label>SIGNATURE ABILITY</label><select id="ability"><option>Solar Flare</option><option>Dark Aura</option><option>Phantom Rush</option><option>Dimension Shift</option><option>Electric Kick</option><option>Fire Punch</option></select></div>
+<div class="grid" style="grid-template-columns:1fr 1fr">
+<div class="field"><label>ARMOR / OUTFIT COLOR</label><input id="color" type="color" value="#8b5cf6"></div><div class="field"><label>ENERGY COLOR</label><input id="energy" type="color" value="#55e6ef"></div></div>
+<div class="field"><label>ACCESSORY / DESIGN DETAIL</label><input id="accessory" maxlength="32" placeholder="e.g. glowing shoulder armor"></div>
+<div class="action-row"><button class="primary" id="saveFighter">✦ SAVE FIGHTER</button><button id="randomize">SURPRISE ME</button></div>
+</div>
+<div class="panel"><div class="eyebrow">CHARACTER PREVIEW</div><div id="preview" style="text-align:center;padding:24px 10px"><div id="previewAvatar" style="font-size:100px">🥷</div><h2 id="previewName">Your New Fighter</h2><div id="previewStyle" class="tag">Solar Boxing</div><p id="previewAbility" class="muted">Solar Flare</p><div id="previewAccessory" class="notice">Your design detail appears here</div></div><div class="notice">Create a name, choose a style and ability, then save your fighter to the roster. Custom fighters start with balanced stats.</div></div>
+</div>
+</section>
+<section id="arena" class="screen hidden">
+<div class="panel"><div class="eyebrow">CHOOSE YOUR BATTLEGROUND</div><h2>Arena Select</h2><p class="muted">Each map hosts a tougher opponent. You can see how hard a map is, but not who waits inside.</p><div class="grid" id="arenas"></div><p class="notice" id="arenaInfo" style="margin-top:15px"></p></div>
+</section>
+<section id="battle" class="screen hidden">
+<div class="section-title"><h2>Combat zone</h2><span class="tag" id="arenaLabel">CYBERPUNK CITY</span></div>
+<div class="battle"><div class="battle-top"><div style="flex:1"><strong id="playerLabel">Your Fighter</strong><div class="health"><span id="playerBar" style="width:100%"></span></div><small class="muted" id="playerHealth">100 / 100 HP</small></div><div class="vs">VS</div><div style="flex:1;text-align:right"><strong id="enemyLabel">Rival</strong><div class="health enemy"><span id="enemyBar" style="width:100%"></span></div><small class="muted" id="enemyHealth">100 / 100 HP</small></div></div>
+<div class="combatants"><div class="combatant"><div class="avatar" id="playerAvatar">🥷</div><strong id="playerStyle">Solar Boxing</strong><span class="tag">CHALLENGER</span></div><div class="vs">✦</div><div class="combatant"><div class="avatar" id="enemyAvatar">👹</div><strong id="enemyStyle">Boss</strong><span class="tag">OPPONENT</span></div></div>
+<div class="battle-bottom"><div class="notice" id="battleHint">Choose a move. Heavy attacks deal more damage but consume energy.</div><div class="minion-row" id="minionRow"></div><div class="moves"><button class="move" data-move="strike">👊 STRIKE<small>10 damage · no energy</small></button><button class="move" data-move="special">⚡ SPECIAL<small>22 damage · 25 energy</small></button><button class="move" data-move="guard">🛡 GUARD<small>Reduce next hit</small></button><button class="move" data-move="ultimate">☄ FINISHER<small>40 damage · 60 energy</small></button></div><div style="display:flex;justify-content:space-between;margin-top:13px"><span>⚡ ENERGY: <b id="energyValue">40</b>/100</span><span style="display:flex;gap:8px"><button id="leaveFight">LEAVE FIGHT</button><button id="restart" class="danger">RESET MATCH</button></span></div><div class="xp-wrap" id="xpWrap"></div><div class="log" id="log">The crowd roars. The battle begins when you choose your first move.</div></div></div>
+</section>
+<section id="tournament" class="screen hidden">
+<div class="two"><div class="panel"><div class="eyebrow">PROVE YOURSELF</div><h2>Championship Circuit</h2><p class="muted">Win battles to earn trophies and titles. Bosses get tougher as you advance.</p><div class="tournament-row"><span>🏟 Championship Battle</span><b id="wins">0 wins</b></div><div class="tournament-row"><span>🌌 Galactic Championship</span><span class="muted">Coming challenge</span></div><div class="tournament-row"><span>♾ Survival Championship</span><span class="muted">Coming challenge</span></div><div class="action-row"><button class="primary" id="startTournament">CHALLENGE MAP BOSS →</button><button id="resetProgress" class="danger">RESET PROGRESS</button></div><div class="notice" id="bossProgress" style="margin-top:12px"></div></div>
+<div class="panel"><h2>Your rewards</h2><div id="rewards" style="display:grid;gap:10px"></div></div></div>
+<div class="panel" id="achievementPanel" style="margin-top:16px"></div>
+</section>
+</main><footer>RIFTBORN · A fan-made playable prototype · No accounts or external services required</footer>
+
+
+
+
+  <div id="intro" class="intro hidden"><div class="intro-card"><div class="eyebrow" id="introKicker"></div><div class="intro-icon" id="introIcon"></div><h2 id="introName"></h2><div class="tag" id="introTitle"></div><p class="muted" id="introArena"></p><p class="notice" id="introLine"></p><button class="primary" id="introGo">FIGHT!</button></div></div>
+  <script src="game.js"></script>
+</body>
+</html>
